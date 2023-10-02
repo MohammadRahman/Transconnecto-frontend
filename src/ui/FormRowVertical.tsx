@@ -17,7 +17,7 @@ interface FromRowProps {
 const FormRowVertical = ({ label, children }: FromRowProps) => {
   return (
     <StyledFormRowVertical>
-      <StyledLabel htmlFor={children.props.id}>{label}</StyledLabel>
+      <StyledLabel htmlFor={children?.props?.id}>{label}</StyledLabel>
       {children}
     </StyledFormRowVertical>
   );

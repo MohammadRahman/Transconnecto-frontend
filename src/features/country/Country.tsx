@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HiXMark } from "react-icons/hi2";
 import { CountryI } from "../../interface";
 import styled from "styled-components";

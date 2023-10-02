@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from 'react-hook-form';
 import FormRowVertical from '../../ui/FormRowVertical';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
 import { useLatAndLong } from './useLatAndLong';
 import { useCreateOffice } from './useCreateOffice';
 import { useSearchParams } from 'react-router-dom';
-import { geocodeAddress } from '../../services/location';
 
 const Form = styled.form`
   width: 100%;
@@ -34,7 +33,7 @@ const FormInput = styled.input`
 const CreateOfficeForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const {latitude, longitude} = useLatAndLong()
-  const { newOffice, isLoading } = useCreateOffice();
+  const { newOffice } = useCreateOffice();
 
   const { register, handleSubmit } = useForm();
  

@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { geocodeAddress } from "../../services/location";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";

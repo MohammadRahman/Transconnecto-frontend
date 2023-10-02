@@ -1,4 +1,3 @@
-import React from 'react'
 import Offices from '../features/office/Offices'
 
 const Dashboard = () => {
