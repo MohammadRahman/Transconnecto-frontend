@@ -1,4 +1,3 @@
-import React from 'react'
 import { HiPlus } from 'react-icons/hi2'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -16,14 +15,14 @@ const StyledList = styled.ul`
   display: flex;
   gap: 4px;
 `
-const Common = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-  border: none;
+// const Common = styled.button`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   outline: none;
+//   border: none;
 
-`
+// `
 const StyledNavlink = styled(NavLink)`
   padding: 5px 2px;
   border-radius: 4px;

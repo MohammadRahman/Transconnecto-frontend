@@ -1,4 +1,5 @@
-import React, { ReactNode } from "react";
+import React from "react";
+import { ReactNode } from "react";
 import styled from "styled-components";
 
 const StyledFormRowVertical = styled.div`
@@ -17,7 +18,15 @@ interface FromRowProps {
 const FormRowVertical = ({ label, children }: FromRowProps) => {
   return (
     <StyledFormRowVertical>
-      <StyledLabel htmlFor={children?.props?.id}>{label}</StyledLabel>
+      <StyledLabel
+        htmlFor={
+          React.isValidElement(children)
+            ? (children as React.ReactElement).props.id
+            : undefined
+        }
+      >
+        {label}
+      </StyledLabel>
       {children}
     </StyledFormRowVertical>
   );

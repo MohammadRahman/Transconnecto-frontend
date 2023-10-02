@@ -5,5 +5,5 @@ export function createUrl(baseUrl: string, location: string): string {
     if (location != null) {
         url.searchParams.set('location', location)
     }
-    return url;
+    return url.toString();
 }
