@@ -1,6 +1,4 @@
-import { getTimezoneOffset } from 'date-fns-tz';
 import tzlookup from 'tz-lookup'
-import * as countryList from 'country-list'
 import { createUrl } from './createUrl';
 import axios from 'axios';
 
