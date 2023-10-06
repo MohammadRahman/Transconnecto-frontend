@@ -58,7 +58,8 @@ const navigate = useNavigate()
       toast.error(error.response.data.message)
     }
  }
-  const { flag } = COUNTRIS.find(count => count.country === country.country)
+  const countryData = COUNTRIS.find(count => count.country === country.country)
+  const flag = countryData?.flag || ''
   return (
     <StyledList>
       <StyledHeader>
