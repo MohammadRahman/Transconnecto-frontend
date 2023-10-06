@@ -10,7 +10,7 @@ grid-template-rows: auto 1fr;
 height: 100vh;
 `
 const StyledMain = styled.main`
-    
+    padding: 1rem;
 `
 const AppLayout = () => {
   return (

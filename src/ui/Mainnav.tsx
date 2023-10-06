@@ -1,17 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
+  HiCloudArrowUp,
   HiOutlineCalendarDays,
 //   HiOutlineCog6Tooth,
   HiOutlineHome,
 //   HiOutlineHomeModern,
 //   HiOutlineUsers,
 } from "react-icons/hi2";
+import { useState } from "react";
+import { countryService } from "../services/country";
+import toast from "react-hot-toast";
 
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  position: relative;
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -52,8 +57,53 @@ const StyledNavLink = styled(NavLink)`
     color: var(--color-brand-600);
   }
 `;
-
+const StyledSampleData = styled.div`
+  width: 100%;
+  display: flex;
+  height: 200px;
+  justify-content: flex-end;
+  flex-direction: column;
+  border-radius: 4px;
+  gap: 8px;
+  /* justify-content: center; */
+  align-items: center;
+  border: 2px solid white;
+  position: absolute;
+  top: 300px;
+  padding: 1rem;
+`
+const StyledButton = styled.button`
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`;
 function MainNav() {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  async function handleClick() {
+    setLoading(true)
+    try {
+      const response = await countryService.uploadSampleCountries();
+      if (response.status === 200) {
+        navigate('countries')
+        toast.success('sample data uploaded')
+        setLoading(false)
+      }
+
+    } catch (error) {
+      console.log(error)
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  
+  }
   return (
     <nav>
       <NavList>
@@ -69,9 +119,18 @@ function MainNav() {
             <span>Countries</span>
           </StyledNavLink>
         </li>
+        <StyledSampleData>
+          <HiCloudArrowUp
+            style={{ width: "100px", height: "100px", color: "white" }}
+          />
+          <StyledButton onClick={handleClick}>
+            {loading ? "Loading" : "UPLOAD COUNTRIES"}
+          </StyledButton>
+        </StyledSampleData>
       </NavList>
     </nav>
   );
 }
-
 export default MainNav;
+
+

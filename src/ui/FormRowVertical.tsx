@@ -12,13 +12,13 @@ const StyledLabel = styled.label`
   opacity: 0.8;
 `;
 interface FromRowProps {
-  label: string;
+  label?: string;
   children: ReactNode;
 }
 const FormRowVertical = ({ label, children }: FromRowProps) => {
   return (
     <StyledFormRowVertical>
-      <StyledLabel
+      {label ? ( <StyledLabel
         htmlFor={
           React.isValidElement(children)
             ? (children as React.ReactElement).props.id
@@ -26,7 +26,8 @@ const FormRowVertical = ({ label, children }: FromRowProps) => {
         }
       >
         {label}
-      </StyledLabel>
+      </StyledLabel>): null}
+     
       {children}
     </StyledFormRowVertical>
   );

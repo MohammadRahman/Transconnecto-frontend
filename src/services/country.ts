@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { COUNTRY } from "../api/apiRoutes";
+import { COUNTRY, OFFICE, SAMPLE_COUNTRY_DATA } from "../api/apiRoutes";
 import { httpCommon } from "../api/httpCommon"
 
 function createCountry(countryData: any) {
@@ -12,8 +12,16 @@ function getCountries() {
 function deleteCountry(name: any) {
     return httpCommon.delete(`${COUNTRY}/${name}`)
 }
+function getOffices(searchValue: any ) {
+    return httpCommon.get(`${OFFICE}/${searchValue}`)
+}
+function uploadSampleCountries() {
+    return httpCommon.get(`${SAMPLE_COUNTRY_DATA}`)
+}
 export const countryService = {
     createCountry,
     getCountries,
-    deleteCountry
+    deleteCountry,
+    getOffices,
+    uploadSampleCountries
 }

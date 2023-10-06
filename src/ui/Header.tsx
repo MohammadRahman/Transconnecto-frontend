@@ -5,9 +5,10 @@ import styled from 'styled-components'
 const StyledHeader = styled.nav`
     height: 5rem;
     display: flex;
-    border: 1px solid black;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--color-grey-100);
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 `
 const StyledList = styled.ul`
   margin: 0;
@@ -24,13 +25,19 @@ const StyledList = styled.ul`
 
 // `
 const StyledNavlink = styled(NavLink)`
-  padding: 5px 2px;
+  padding: 0.5rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: var(--color-green-700);
-  color: var(--color-grey-0);
+  border: 1px solid #b33605;
+  background-color: var(--color-grey-100);
+  color: #1d1f4e;
+
+  &:hover {
+    background-color: #1d1f4e;
+    color: white;
+  }
 `;
 const Header = () => {
   return (

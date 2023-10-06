@@ -5,7 +5,15 @@ export interface OfficeI{
     latitude: number;
     longitude: number
 }
+export interface OfficeDI{
+    name: string;
+    city: string;
+    country: string;
+    latitude: number;
+    longitude: number;
+    distance: string
+}
 export interface CountryI {
     country: string;
-    timezone: string
+    timezone: string;
 }

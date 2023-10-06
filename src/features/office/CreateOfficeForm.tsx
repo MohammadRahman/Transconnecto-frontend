@@ -3,9 +3,16 @@ import { useForm } from 'react-hook-form';
 import FormRowVertical from '../../ui/FormRowVertical';
 import styled from 'styled-components';
 import { useLatAndLong } from './useLatAndLong';
-import { useCreateOffice } from './useCreateOffice';
-import { useSearchParams } from 'react-router-dom';
+// import { useCreateOffice } from './useCreateOffice';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { officeService } from '../../services/office';
+import toast from 'react-hot-toast';
 
+const OfficeFormContainer = styled.div`
+  width: 70%;
+  border: 1px solid #b33605;
+  border-radius: 4px;
+`;
 const Form = styled.form`
   width: 100%;
   border-top: 1px solid var(--color-grey-100);
@@ -16,8 +23,8 @@ const FormInputWrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   row-gap: 2rem;
   column-gap: 3rem;
-  padding: 1.5rem 3rem 5rem;
-  border-bottom: 1px solid var(--color-grey-100);
+  padding: 1.5rem 3rem 2rem;
+  /* border-bottom: 1px solid var(--color-grey-100); */
 `;
 
 const FormInput = styled.input`
@@ -30,10 +37,23 @@ const FormInput = styled.input`
     outline: none;
   }
 `;
+const StyledButton = styled.button`
+  width: 20%;
+  margin-left: 3rem;
+  background-color: #0d966b;
+  border: none;
+  outline: none;
+  padding: 6px;
+  border-radius: 4px;
+  &:focus {
+    outline: none;
+  }
+`;
 const CreateOfficeForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate()
   const {latitude, longitude} = useLatAndLong()
-  const { newOffice } = useCreateOffice();
+  // const { newOffice } = useCreateOffice();
 
   const { register, handleSubmit } = useForm();
  
@@ -45,29 +65,43 @@ const CreateOfficeForm = () => {
     setSearchParams(searchParams)
     searchParams.set('address', value.address)
     setSearchParams(searchParams)
-    newOffice({...value, latitude, longitude});
+    try {
+      const response = await officeService.createOffice({
+        ...value, latitude, longitude
+      })
+      if (response.data) {
+        toast.success('new office added')
+        setTimeout(() => {
+          navigate("/dashboard");
+        },1500)
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message)
+    }
+    // newOffice({...value, latitude, longitude});
   } 
 
   return (
-    <Form onSubmit={handleSubmit(formHandler)}>
-      <FormInputWrapper>
-        <FormRowVertical label="Name">
-          <FormInput id="name" type="text" {...register("name")} />
-        </FormRowVertical>
-        <FormRowVertical label="City">
-          <FormInput id="city" type="city" {...register("city")} />
-        </FormRowVertical>
-        <FormRowVertical label="Country">
-          <FormInput id="country" type="text" {...register("country")} />
-        </FormRowVertical>
-        <FormRowVertical label="Address">
-          <FormInput id="address" type="text" {...register("address")} />
-        </FormRowVertical>
-      </FormInputWrapper>
-      <div>
-        <button type="submit">submit</button>
-      </div>
-    </Form>
+    <OfficeFormContainer>
+      <h2 style={{marginLeft: '3.5rem'}}>Create new office</h2>
+      <Form onSubmit={handleSubmit(formHandler)}>
+        <FormInputWrapper>
+          <FormRowVertical label="Name">
+            <FormInput id="name" type="text" {...register("name")} />
+          </FormRowVertical>
+          <FormRowVertical label="City">
+            <FormInput id="city" type="city" {...register("city")} />
+          </FormRowVertical>
+          <FormRowVertical label="Country">
+            <FormInput id="country" type="text" {...register("country")} />
+          </FormRowVertical>
+          <FormRowVertical label="Address">
+            <FormInput id="address" type="text" {...register("address")} />
+          </FormRowVertical>
+        </FormInputWrapper>
+          <StyledButton type="submit">submit</StyledButton>
+      </Form>
+    </OfficeFormContainer>
   );
 }
 

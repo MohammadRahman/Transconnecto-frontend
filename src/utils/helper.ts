@@ -20,7 +20,6 @@ export function getLocalTimeByCountry(lat: number, long: number) {
 
     return null;
 }
-
 export async function getGMTOffsetByCountry(country: string) {
     try {
         const url = createUrl(BASE_URL, country)
@@ -30,6 +29,4 @@ export async function getGMTOffsetByCountry(country: string) {
     } catch (error) {
         console.log(error)
     }
-    
-
 }
