@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { countryService } from "../../services/country";
 import toast from "react-hot-toast";
@@ -13,6 +14,7 @@ export function useDelete() {
       toast.success("country removed.");
       queryClient.invalidateQueries({ queryKey: ["countries"] });
     },
+    onError: (error:any) => toast.error(error.response.data.message),
   });
 
   return { removeCountry, isLoading };
