@@ -12,8 +12,6 @@ const StyledOffices = styled.ul`
 `
 export function Offices() {
 
-  
-  // const { offices, isLoading } = useFetchOffices();
   const { offices, isLoading } = useOfficeWithEffect();
 
   if(isLoading) return <h2>Loading...</h2>

@@ -2,11 +2,9 @@
 import { HiXMark } from "react-icons/hi2";
 import { CountryI } from "../../interface";
 import styled from "styled-components";
-import { countryService } from "../../services/country";
-import toast from "react-hot-toast";
 import COUNTRIS from '../../data/countries.json'
 import Heading from "../../ui/Heading";
-import { useNavigate } from "react-router-dom";
+import { useDelete } from "./useDelete";
 
 const StyledList = styled.li`
   width: 100%;
@@ -46,18 +44,7 @@ type CountryProps = {
 };
 
 const Country = ({ country }: CountryProps) => {
-const navigate = useNavigate()
- async function deleteCountry(name: any) {
-    try {
-      const response = await countryService.deleteCountry(name)
-      if (response.status === 200) {
-        toast.success(`${name} deleted`)
-        navigate('/')
-      }
-    } catch (error: any) {
-      toast.error(error.response.data.message)
-    }
- }
+  const { removeCountry } = useDelete();
   const countryData = COUNTRIS.find(count => count.country === country.country)
   const flag = countryData?.flag || ''
   return (
@@ -77,7 +64,7 @@ const navigate = useNavigate()
         <Heading as="h3">{country.country}</Heading>
       </StyledHeader>
       <p>{country.timezone}</p>
-      <StyledIcon onClick={() => deleteCountry(country.country)}>
+      <StyledIcon onClick={() => removeCountry(country.country)}>
         <HiXMark />
       </StyledIcon>
     </StyledList>

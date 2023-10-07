@@ -96,13 +96,13 @@ function MainNav() {
         setLoading(false)
       }
 
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
+      toast.error(error.response.data.message);
       setLoading(false);
     } finally {
       setLoading(false);
     }
-  
   }
   return (
     <nav>

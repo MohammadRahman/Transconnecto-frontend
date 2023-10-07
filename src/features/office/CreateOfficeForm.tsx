@@ -2,8 +2,6 @@
 import { useForm } from 'react-hook-form';
 import FormRowVertical from '../../ui/FormRowVertical';
 import styled from 'styled-components';
-import { useLatAndLong } from './useLatAndLong';
-// import { useCreateOffice } from './useCreateOffice';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { officeService } from '../../services/office';
 import toast from 'react-hot-toast';
@@ -52,13 +50,9 @@ const StyledButton = styled.button`
 const CreateOfficeForm = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate()
-  const {latitude, longitude} = useLatAndLong()
-  // const { newOffice } = useCreateOffice();
-
   const { register, handleSubmit } = useForm();
  
   async function formHandler(value: any) {
-    // const { address, ...rest } = value;
     searchParams.set('city', value.city)
     setSearchParams(searchParams)
     searchParams.set('country', value.country)
@@ -66,9 +60,8 @@ const CreateOfficeForm = () => {
     searchParams.set('address', value.address)
     setSearchParams(searchParams)
     try {
-      const response = await officeService.createOffice({
-        ...value, latitude, longitude
-      })
+      const response = await officeService.createOffice(value
+      )
       if (response.data) {
         toast.success('new office added')
         setTimeout(() => {
@@ -78,7 +71,6 @@ const CreateOfficeForm = () => {
     } catch (error: any) {
       toast.error(error.response.data.message)
     }
-    // newOffice({...value, latitude, longitude});
   } 
 
   return (

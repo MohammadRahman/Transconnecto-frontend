@@ -32,7 +32,6 @@ const ClockContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
 `;
 const StyledTime = styled.p`
   font-size: 12px;
@@ -44,12 +43,9 @@ type OfficeProps = {
 
 const Office = ({ office }: OfficeProps) => { 
   const currentTime = useUpdateTime(office.latitude, office.longitude);
-  // console.log(currentTime)
   const time = currentTime?.split(',')[1]
   const countryData = COUNTRIES.find(count => count.country === office.country)
   const flag = countryData?.flag || ''
-  // const date = currentTime?.split(',')[0]
-  console.log(time)
   return (
     <StyledList>
       <StyledHeader>

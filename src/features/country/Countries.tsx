@@ -4,7 +4,7 @@ import { CountryI, OfficeDI } from "../../interface";
 import Heading from "../../ui/Heading";
 import Row from "../../ui/Row";
 import Country from "./Country";
-import {  useCountryWithEffect } from "./useCountry";
+import {  useCountry, useCountryWithEffect } from "./useCountry";
 // import { useCountry } from "./useCountry";
 import styled from "styled-components";
 import { useSearchParams } from "react-router-dom";
@@ -63,8 +63,8 @@ const StyledButton = styled.button`
   }
 `;
 export function Offices() {
-  // const { countries, isLoading } = useCountry();
-  const { countries, isLoading } = useCountryWithEffect();
+  const { countries, isLoading } = useCountry();
+  // const { countries, isLoading } = useCountryWithEffect();
   const { offices } = useSearchCountry();
   const [serachParam, setSerachParam] = useSearchParams()
   const {register, handleSubmit} = useForm()

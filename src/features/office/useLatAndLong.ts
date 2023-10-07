@@ -15,6 +15,7 @@ export function useLatAndLong() {
     useEffect(() => {
         async function getLatsAdnLongs() {
             const { latitude, longitude } = await geocodeAddress({ city, country, address });
+            console.log("useLat and log hook", { latitude, longitude })
             setLatitude(latitude);
             setLongitude(longitude)
         }

@@ -12,13 +12,13 @@ export async function geocodeAddress({ city, country, address }: any) {
         const response = await axios.get(
             `https://nominatim.openstreetmap.org/search?format=json&q=${encodedAddress}`
         );
-
+console.log("response from geoCode", response)
         if (response.data && response.data.length > 0) {
             const location = response.data[0];
 
             const latitude = parseFloat(location.lat);
             const longitude = parseFloat(location.lon);
-
+            console.log("lat,lon in useEffect", {latitude, longitude})
             return { latitude, longitude };
         } else {
             throw new Error('No results found');

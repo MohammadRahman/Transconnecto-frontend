@@ -2,7 +2,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { officeService } from "../../services/office";
 import { useState, useEffect } from "react";
-// import {fetchOffices}  from "../../services/office";
 
 export function useFetchOffices() {
     const { data: offices, isLoading } = useQuery({

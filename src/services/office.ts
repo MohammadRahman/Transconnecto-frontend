@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// export async function fetchOffices() {
-//     try {
-//         const response = await axios.get('http://localhost:3009/office')
-//         return response.data;
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
 
 import axios from "axios";
 import { OFFICE } from "../api/apiRoutes";
 import { httpCommon } from "../api/httpCommon";
+import { geocodeAddress } from "./location";
 
 export async function createOffice2(data: any) {
     try {
@@ -23,8 +16,16 @@ export async function createOffice2(data: any) {
         throw new Error(error.response)
     }
 }
-function createOffice(officeData: any) {
-   return httpCommon.post(OFFICE, officeData)
+async function createOffice(officeData: any) {
+    const { latitude, longitude } = await geocodeAddress({ city: officeData.city, country: officeData.country, address: officeData.address });
+    const newOffice = {
+        name: officeData.name,
+        city: officeData.city,
+        country: officeData.country,
+        latitude,
+        longitude
+    }
+    return httpCommon.post(OFFICE, newOffice)
 }
 function findAllOffices() {
    return httpCommon.get(OFFICE)
