@@ -1,19 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { useEffect, useState } from "react";
+
 import { CountryI, OfficeDI } from "../../interface";
 import Heading from "../../ui/Heading";
 import Row from "../../ui/Row";
 import Country from "./Country";
-import {  useCountry, useCountryWithEffect } from "./useCountry";
-// import { useCountry } from "./useCountry";
+import {  useCountry } from "./useCountry";
 import styled from "styled-components";
 import { useSearchParams } from "react-router-dom";
-// import { useDebounce } from "../../hooks/debounce";
 import { useSearchCountry } from "./useSearchCountry";
 import { useForm } from "react-hook-form";
 import FormRowVertical from "../../ui/FormRowVertical";
 import { HiMagnifyingGlass } from "react-icons/hi2";
-// import Office from "../office/Office";
 import ListOffices from "../office/ListOffices";
 
 const StyledOffices = styled.ul`
@@ -64,7 +61,6 @@ const StyledButton = styled.button`
 `;
 export function Offices() {
   const { countries, isLoading } = useCountry();
-  // const { countries, isLoading } = useCountryWithEffect();
   const { offices } = useSearchCountry();
   const [serachParam, setSerachParam] = useSearchParams()
   const {register, handleSubmit} = useForm()
